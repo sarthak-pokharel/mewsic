@@ -28,7 +28,7 @@ body {
     -webkit-box-pack: center;
     -ms-flex-pack: center;
     justify-content: center;
-    /*visibility: hidden;*/
+    visibility: hidden;
 }
 
 #content-cover {

@@ -58,6 +58,11 @@ btnReplay.addEventListener("click", () => {
 });
 
 //---------------- Audio
+
+audio.addEventListener("ended", function () {
+	console.log("Song ended");
+	$(".btn-nextt").trigger('click')
+})
 audio.addEventListener("timeupdate", function () {
 	//Time
 	var duration = audio.duration;

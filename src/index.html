@@ -4,6 +4,7 @@
 <head>
     <meta charset="utf-8">
     <title></title>
+    <link rel="icon" href="/favicon.ico">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" crossorigin="anonymous" />
     <!-- <script async src="https://kit.fontawesome.com/a6eec1d329.js" crossorigin="anonymous"></script> -->
     <link rel="stylesheet" type="text/css" href="./stylesheets/Music.css">
@@ -12,13 +13,18 @@
 
 <body>
     <div id="app">
+        <div class="loader">
+            <div id="loading-indicator" style="width: 60px; height: 60px;" role="progressbar" class="MuiCircularProgress-root MuiCircularProgress-colorPrimary MuiCircularProgress-indeterminate"><svg viewBox="22 22 44 44" class="MuiCircularProgress-svg">
+                    <circle cx="44" cy="44" r="20.2" fill="none" stroke-width="3.6" class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate"></circle>
+                </svg></div>
+        </div>
         <div class="music-app ctnt">
             <div id="content-cover">
-                <img class="cover" src="./img/img.webp" alt="" />
+                <img class="cover" src="./img/music-poster.png" alt="" />
             </div>
             <div class="content-audio">
                 <audio id="audioplayer">
-                    <source src="#nosource" >
+                    <source src="#nosource">
                     Your browser does not support the audio element
                 </audio>
             </div>
@@ -48,6 +54,8 @@
             </div>
         </div>
     </div>
+    <script src="./MajorAppController.js"></script>
+    <script src="./MusicPlayerHandler.js"></script>
     <script type="module" src="./main.js"></script>
 </body>
 
