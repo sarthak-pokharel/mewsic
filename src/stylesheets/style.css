@@ -9,3 +9,44 @@ html {
 body {
 	margin: 0;
 }
+
+.link-query {
+	margin: auto;
+	width: 100%;
+	max-width: 500px;
+}
+.title {
+	font-size: 3em;
+	text-align: center;
+}
+
+.input-container {
+	display: flex;
+    justify-content: space-around;
+}
+.link-input {
+	font-size: 1.3em;
+	background: transparent;
+	border: none;
+	width: 70%;
+	padding: 1%;
+	outline: none;
+	border-bottom: 2px solid ;
+	border-radius: 10px;
+}
+
+.link-input:hover {
+	border-color: #2196f3;
+}
+.open-link {
+	border: none;
+	background: #2196f3;
+	color:  #fff;
+	font-size: 1.3em;
+	padding: 1% 5%;
+	cursor: pointer;
+}
+.open-link:active {
+	background: white;
+	color: #2196f3;
+}

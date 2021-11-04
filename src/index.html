@@ -3,6 +3,7 @@
 
 <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title></title>
     <style type="text/css" media="screen">
         .music-app {
@@ -15,6 +16,15 @@
 
 <body>
     <div id="app">
+        <div class="link-query hidden">
+            <div class="title">
+                Youtube Player
+            </div>
+            <div class="input-container">
+                <input id="link" class='link-input' placeholder="Paste your youtube song or playlist here" />
+                <button class="open-link">Play</button>
+            </div>
+        </div>
         <div class="loader">
             <div id="loading-indicator" style="width: 60px; height: 60px;" role="progressbar" class="MuiCircularProgress-root MuiCircularProgress-colorPrimary MuiCircularProgress-indeterminate"><svg viewBox="22 22 44 44" class="MuiCircularProgress-svg">
                     <circle cx="44" cy="44" r="20.2" fill="none" stroke-width="3.6" class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate"></circle>

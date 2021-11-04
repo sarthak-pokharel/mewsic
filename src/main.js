@@ -6,11 +6,11 @@ import $ from 'jquery';
 
 $(Main);
 
-let songsList = null, ci = 0, audioQuality = "max";
+let songsList = null, ci = 0,cmusic = null, audioQuality = "max";
 let loadedurl = false;
 //music server
 let serverInfo = new URL('http://localhost:8080/');
-let production = true;
+let production = false;
 if(production){
 	serverInfo.host = "mewsicserver.herokuapp.com";
 	serverInfo.port = "443";
@@ -24,11 +24,59 @@ let toHandle = {
 	song: uhand.searchParams.get('song')
 };
 
+
+function isValidHttpUrl(string) {
+  //stackoverflow
+  let url;
+  
+  try {
+    url = new URL(string);
+  } catch (_) {
+    return false;  
+  }
+
+  return url.protocol === "http:" || url.protocol === "https:";
+}
+
+
+async function updateFrmClip(){
+	try {
+		let cliptext = await navigator.clipboard.readText();
+		if(!isValidHttpUrl(cliptext)) return;
+		$('#link').val(cliptext);
+	}catch(e){
+		console.log('Clipboard not pasted',e);
+	}
+}
+
+updateFrmClip();
+setInterval(updateFrmClip, 5000)
+
+$(".open-link").click(function(){
+	let inp = $("#link").val();
+	console.log(inp)
+	let opurl = new URL(location.origin);
+	if(inp.includes('playlist')) {
+		opurl.searchParams.set('playlist',inp);
+	}else {
+		opurl.searchParams.set('song',inp);
+	}
+	location.href = opurl.toString();
+});
+$("#link").on('keydown',({key})=>(key=='Enter'?$(".open-link").trigger('click'):void 0))
+
+
+const needLinkToPlay = ()=>{
+	$('.loader').addClass('hidden');
+	$('.link-query').removeClass('hidden');
+	console.log("No Link deteded");
+}
+
 async function Main(){
-	console.log(toHandle)
+	console.log(toHandle);
 	if(toHandle.playlist) songsList = await loadSongs();
 	else if(toHandle.song) songsList = [toHandle.song];
-
+	else return needLinkToPlay();
 	console.log(songsList);
 	hideLoader();
 };
@@ -67,7 +115,7 @@ const loadSong = async ()=>{
 	showLoader();
 	let {flt,thumbnails} = await getYtSongDetail(songsList[ci]);
 	let songd = chooseQuality(flt);
-	$("img.cover").prop('src', thumbnails.pop().url);
+	cmusic = {flt: flt, thumbnails: thumbnails}
 	hideLoader();
 	loadedurl = true;
 	$("#audioplayer").attr("src",songd.url);
@@ -106,6 +154,7 @@ const playMusic = async ()=> {
 	if(!loadedurl) await loadSong();
 	cover.setAttribute("class", "play");
 	icon.setAttribute("class", "fas fa-pause");
+	$("img.cover,img.play")[0].src = cmusic.thumbnails.pop().url;
 	audio.play(); playing = true; count += 1;
 }
 
@@ -129,13 +178,13 @@ $(audio).on("timeupdate", ()=> {
 	$("#duration")[0].innerHTML = convertElapsedTime(audio.duration);
 	$("#current-time")[0].innerHTML = convertElapsedTime(audio.currentTime);
 	$("#progress")[0].style.width = (audio.currentTime / audio.duration) * 100 + "%";
+
 	if (audio.currentTime >= audio.duration) stopMusic();
 });
 
 
-$("#progress-bar").on("mousedown", (event)=> {
-	audio.currentTime =
-		((event.clientX - event.target.offsetLeft) / event.target.offsetWidth) * audio.duration;
+$("#progress-bar").on("mousedown", function(event) {
+	audio.currentTime = (event.offsetX / $(this).width()) * audio.duration;
 });	
 
 
