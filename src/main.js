@@ -10,7 +10,7 @@ let songsList = null, ci = 0,cmusic = null, audioQuality = "max";
 let loadedurl = false;
 //music server
 let serverInfo = new URL('http://localhost:8080/');
-let production = false;
+let production = true;
 if(production){
 	serverInfo.host = "mewsicserver.herokuapp.com";
 	serverInfo.port = "443";
