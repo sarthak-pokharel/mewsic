@@ -1,15 +1,54 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-	<meta charset="utf-8">
-	<title></title>
-	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" 
-	crossorigin="anonymous"/>
-	<script async src="https://kit.fontawesome.com/a6eec1d329.js" crossorigin="anonymous"></script>
-	<link rel="stylesheet" type="text/css" href="./Styles.css">
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" crossorigin="anonymous" />
+    <!-- <script async src="https://kit.fontawesome.com/a6eec1d329.js" crossorigin="anonymous"></script> -->
+    <link rel="stylesheet" type="text/css" href="./stylesheets/Music.css">
+    <script src="./qlibs/jquery-3.6.0.min.js"></script>
 </head>
+
 <body>
-	<div id="app">Reset app</div>
+    <div id="app">
+        <div class="music-app ctnt">
+            <div id="content-cover">
+                <img class="cover" src="./img/img.webp" alt="" />
+            </div>
+            <div class="content-audio">
+                <audio id="audioplayer">
+                    <source src="#nosource" >
+                    Your browser does not support the audio element
+                </audio>
+            </div>
+            <div id="progress-bar">
+                <div id="progress"></div>
+            </div>
+            <div class="audio-time">
+                <span id="current-time">0:00</span>
+                <span id="duration">0:00</span>
+            </div>
+            <div class="controls">
+                <button class="custom-btn btn-replay" id="replay">
+                    <span class="icons fas fa-undo"></span>
+                </button>
+                <button class="custom-btn btn-prevv" id="previous">
+                    <span class="icons fas fa-chevron-circle-left"></span>
+                </button>
+                <button class="custom-btn btn-play" id="play">
+                    <span class="icons fas fa-play"></span>
+                </button>
+                <button class="custom-btn btn-nextt" id="next">
+                    <span class="icons fas fa-chevron-circle-right"></span>
+                </button>
+                <button class="custom-btn btn-stop" id="stop">
+                    <span class="icons fas fa-stop"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <script type="module" src="./main.js"></script>
 </body>
 
 </html>
