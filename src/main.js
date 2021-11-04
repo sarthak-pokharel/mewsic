@@ -10,13 +10,26 @@ let songsList = null, ci = 0, audioQuality = "max";
 let loadedurl = false;
 //music server
 let serverInfo = new URL('http://localhost:8080/');
-serverInfo.host = "localhost";
-serverInfo.port = "8080";
-serverInfo.protocol = "http";
+let production = true;
+if(production){
+	serverInfo.host = "mewsicserver.herokuapp.com";
+	serverInfo.port = "443";
+	serverInfo.protocol = "https";
+}
+
+
+let uhand = new URL(location.href);
+let toHandle = {
+	playlist: uhand.searchParams.get('playlist'),
+	song: uhand.searchParams.get('song')
+};
 
 async function Main(){
-	let songs = await loadSongs();
-	songsList = songs;
+	console.log(toHandle)
+	if(toHandle.playlist) songsList = await loadSongs();
+	else if(toHandle.song) songsList = [toHandle.song];
+
+	console.log(songsList);
 	hideLoader();
 };
 
@@ -65,7 +78,7 @@ const loadSong = async ()=>{
 
 const getYtSongDetail = (ytUrl)=>{
 	return new Promise((res,rej)=>{
-		$.post(serverInfo.toString() + "getYtSongDetail", {ytUrl}, function(data){
+		$.get((new URL("/getYtSongDetail", serverInfo)).toString(), {ytUrl}, function(data){
 			let flt = data.formats
 				.filter(x=>x.mimeType.startsWith("audio/"))
 				.sort((x,y)=>x.audioBitrate-y.audioBitrate);
@@ -76,9 +89,7 @@ const getYtSongDetail = (ytUrl)=>{
 
 const loadSongs = function (songs){
 	return new Promise((res,rej)=>{
-		$.get(serverInfo.toString()+
-				"getMusicList?playlist="+
-				encodeURI('https://www.youtube.com/playlist?list=PLsFgdBwHAdmY1GmdwH3DhCk8BX8ND4-tl'), 
+		$.get((new URL("/getMusicList?playlist=" + encodeURI(toHandle.playlist),serverInfo)).toString(),
 			data=>res(data));
 	})
 }
