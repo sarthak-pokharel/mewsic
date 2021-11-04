@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" 
+	crossorigin="anonymous"/>
+	<script async src="https://kit.fontawesome.com/a6eec1d329.js" crossorigin="anonymous"></script>
+	<link rel="stylesheet" type="text/css" href="./Styles.css">
+</head>
+<body>
+	<div class="loader">
+
+		<div id="loading-indicator" style="width: 60px; height: 60px;" role="progressbar" class="MuiCircularProgress-root MuiCircularProgress-colorPrimary MuiCircularProgress-indeterminate"><svg viewBox="22 22 44 44" class="MuiCircularProgress-svg"> <circle cx="44" cy="44" r="20.2" fill="none" stroke-width="3.6" class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate"></circle></svg></div>
+
+	</div>
+
+	<div class="music-app ctnt">
+		<div id="content-cover">
+			<img class="cover" src="https://i.ibb.co/G3qL1XT/img.webp" alt="PlayList" />
+		</div>
+		<div class="content-audio">
+			<audio id="audioplayer">
+				<source src=""/>
+				Your browser does not support the audio element
+			</audio>
+		</div>
+		<div id="progress-bar">
+			<div id="progress"></div>
+		</div>
+		<div class="audio-time">
+			<span id="current-time">0:00</span>
+			<span id="duration">0:00</span>
+		</div>
+		<div class="controls">
+			<button class="custom-btn btn-replay" id="replay">
+				<span class="icons fas fa-undo"></span>
+			</button>
+
+			<button class="custom-btn btn-prevv" id="previous">
+				<span class="icons fas fa-chevron-circle-left"></span>
+			</button>
+
+			<button class="custom-btn btn-play" id="play">
+				<span class="icons fas fa-play"></span>
+			</button>
+
+			<button class="custom-btn btn-nextt" id="next">
+				<span class="icons fas fa-chevron-circle-right"></span>
+			</button>
+
+			<!-- <button class="custom-btn btn-next" id="next">
+				<span id="icon" class="icons fas fa-chevron-circle-right"></span>
+			</button> -->
+
+			<button class="custom-btn btn-stop" id="stop">
+				<span class="icons fas fa-stop"></span>
+			</button>
+		</div>
+	</div>
+
+	<script src="./jquery-3.6.0.min.js"></script>
+	<script src="./MusicHandler.js"></script>
+	<script src="./AppController.js"></script>
+</body>
+</html>
