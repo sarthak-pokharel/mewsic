@@ -28,7 +28,12 @@ body {
     -webkit-box-pack: center;
     -ms-flex-pack: center;
     justify-content: center;
-    visibility: hidden;
+}
+.music-app.hidden {
+    display: none;
+}
+.hidden {
+    display: none;
 }
 
 #content-cover {

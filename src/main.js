@@ -1,4 +1,7 @@
+import './stylesheets/Music.css';
 import './stylesheets/style.css';
+import $ from 'jquery';
+
 
 
 $(Main);
@@ -14,32 +17,23 @@ let serverInfo = new URL('https://localhost:3000/');
 serverInfo.host = "localhost";
 serverInfo.port = "8080";
 serverInfo.protocol = "http";
-console.log(serverInfo);
+
 
 
 async function Main(){
-
 	let songs = await loadSongs();
 	// console.log(songs);
 	// await playSong();
 	hideLoader();
 };
 
-function hideLoader(){
-	hideEl($(".loader")); hideEl($(".music-app"), true);
-}
+const showLoader = ()=> [hideEl($(".loader"), true), hideEl($(".music-app"))];
+const hideLoader = ()=> [hideEl($(".loader")), hideEl($(".music-app"), true)];
 
-function showLoader(){
-	hideEl($(".loader"), true); hideEl($(".music-app"));
-}
 
-$("#next").click(function(){
-	playNext();
-});
 
-$("#previous").click(function(){
-	playPrev();
-});
+$("#next").click(()=>playNext());
+$("#previous").click(()=>playPrev());
 
 function playNext(){
 	stopMusic();
@@ -56,30 +50,23 @@ function playPrev(){
 }
 
 function chooseQuality(songflist){
-	// stopMusic();
-	if(audioQuality == "max"){
-		return songflist[songflist.length-1];
-	}else if(audioQuality == "min"){
-		return songflist[0];
-	}
+	if(audioQuality == "max") return songflist[songflist.length-1];
+	else if(audioQuality == "min") return songflist[0];
 	return songflist[songflist.length-1];
 }
 
 async function loadSong(){
 	showLoader();
 	let {flt,thumbnails} = await getYtSongDetail(songsList[ci]);
-	// console.log(thumbnails,thumbnails.pop().url)
 	let songd = chooseQuality(flt);
-	$("img.cover").prop('src', thumbnails.pop().url)
+	$("img.cover").prop('src', thumbnails.pop().url);
 	hideLoader();
 	loadedurl = true;
 	$("#audioplayer").attr("src",songd.url);
 }
 
 
-function hideEl($el,f=false){
-	return $el.css("visibility",!f?"hidden":"visible");
-}
+const hideEl = ($el,f=false)=> f?$el.removeClass('hidden'):$el.addClass('hidden');
 
 function getYtSongDetail(ytUrl){
 	return new Promise((res,rej)=>{

@@ -4,11 +4,13 @@
 <head>
     <meta charset="utf-8">
     <title></title>
+    <style type="text/css" media="screen">
+        .music-app {
+            display: none;
+        }
+    </style>
     <link rel="icon" href="/favicon.ico">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" crossorigin="anonymous" />
-    <!-- <script async src="https://kit.fontawesome.com/a6eec1d329.js" crossorigin="anonymous"></script> -->
-    <link rel="stylesheet" type="text/css" href="./stylesheets/Music.css">
-    <script src="./qlibs/jquery-3.6.0.min.js"></script>
 </head>
 
 <body>
@@ -18,7 +20,7 @@
                     <circle cx="44" cy="44" r="20.2" fill="none" stroke-width="3.6" class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate"></circle>
                 </svg></div>
         </div>
-        <div class="music-app ctnt">
+        <div class="music-app ctnt hidden">
             <div id="content-cover">
                 <img class="cover" src="./img/music-poster.png" alt="" />
             </div>
@@ -55,8 +57,6 @@
         </div>
     </div>
     <script type="module" src="./main.js"></script>
-    <script src="./MajorAppController.js"></script>
-    <script src="./MusicPlayerHandler.js"></script>
 </body>
 
 </html>
